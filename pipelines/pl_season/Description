@@ -1,0 +1,6 @@
+Pipeline to extract the raw JSON data from https://www.api-football.com/ for a season and output 4 CSV files containing fixture_id list.
+
+1. Use the Rest API to extract the data related to the given season for the Spanish primary division (La Liga) and store it as JSON in a blob sink.
+2. Use Databricks to transform the JSON and retrieve necessary information about the season and store it as a CSV in the blob container.
+3. Ingest the season data into a local SQL Server instance.
+4. Take the same CSV file created in step 3 to output 4 CSV files that contain a list of fixture_id, 95 records each. CSV files will be stored in blob and will be used in two pipelines pl_fixture_raw and pl_fixture.
