@@ -1,0 +1,5 @@
+Pipeline to transform the fixture data in json and ingest to tranformed data into a SQL server database.
+
+1. Lookup activity that grabs the fixture_id list.
+2. ForEach activity iterated over the list from the lookup and tranforms the json files with the fixture_id name of that in the list using a Databricks notebook.
+3. Copy activity read all the output CSV files from the notbook and ingest it to the SQL Server database.
