@@ -1,0 +1,160 @@
+{
+    "name": "pl_fixture_raw",
+    "properties": {
+        "activities": [
+            {
+                "name": "For each fixture_id",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "lookup_fixture_id",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@activity('lookup_fixture_id').output.value",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "copy fixture data",
+                            "type": "Copy",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "RestSource",
+                                    "httpRequestTimeout": "00:01:40",
+                                    "requestInterval": "00.00:00:00.010",
+                                    "requestMethod": "GET",
+                                    "paginationRules": {
+                                        "supportRFC5988": "true"
+                                    }
+                                },
+                                "sink": {
+                                    "type": "JsonSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobStorageWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "JsonWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "ds_fixtureData",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "fixtureID": {
+                                            "value": "@item().fixture_id",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_fixtureData_json",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "fixtureID": {
+                                            "value": "@item().fixture_id",
+                                            "type": "Expression"
+                                        },
+                                        "seasonYear": {
+                                            "value": "@pipeline().parameters.seasonYear",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Wait1",
+                            "type": "Wait",
+                            "dependsOn": [
+                                {
+                                    "activity": "copy fixture data",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "waitTimeInSeconds": 8
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "lookup_fixture_id",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageReadSettings",
+                            "recursive": true,
+                            "wildcardFileName": "*.csv",
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "dataset": {
+                        "referenceName": "ds_fxtureIdList_csv",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "seasonYear": {
+                                "value": "@pipeline().parameters.seasonYear",
+                                "type": "Expression"
+                            },
+                            "sinkFileNumber": {
+                                "value": "@pipeline().parameters.sinkFileNumber",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "firstRowOnly": false
+                }
+            }
+        ],
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            },
+            "sinkFileNumber": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2025-05-21T09:50:40Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
