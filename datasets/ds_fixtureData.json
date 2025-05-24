@@ -1,0 +1,24 @@
+{
+    "name": "ds_fixtureData",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_apifootball_league",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "fixtureID": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "@concat('fixtures?id=',dataset().fixtureID)",
+                "type": "Expression"
+            }
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}
