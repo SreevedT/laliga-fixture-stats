@@ -1,0 +1,14 @@
+{
+    "name": "ls_apifootball_league",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "RestService",
+        "typeProperties": {
+            "url": "https://v3.football.api-sports.io/",
+            "enableServerCertificateValidation": true,
+            "authenticationType": "Anonymous",
+            "encryptedCredential": ""
+        }
+    }
+}
