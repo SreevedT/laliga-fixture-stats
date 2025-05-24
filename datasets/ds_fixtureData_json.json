@@ -1,0 +1,35 @@
+{
+    "name": "ds_fixtureData_json",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_fixtureData_json",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "fixtureID": {
+                "type": "string"
+            },
+            "seasonYear": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": {
+                    "value": "@concat('fixture_',dataset().fixtureID,'.json')",
+                    "type": "Expression"
+                },
+                "folderPath": {
+                    "value": "@dataset().seasonYear",
+                    "type": "Expression"
+                },
+                "container": "fixturedata"
+            }
+        },
+        "schema": {}
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}
