@@ -1,0 +1,13 @@
+{
+    "name": "adb_leaguedata_json",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureDatabricks",
+        "typeProperties": {
+            "domain": "https://adb-2989639254406380.0.azuredatabricks.net",
+            "existingClusterId": "0412-212207-urrhlrwu",
+            "encryptedCredential": ""
+        }
+    }
+}
