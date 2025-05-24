@@ -1,0 +1,204 @@
+{
+    "name": "ds_fixtureDataTable",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_fixtureDataTable",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            },
+            "sinkFileNumber": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": {
+                    "value": "@{dataset().seasonYear}/list_@{dataset().sinkFileNumber}_fixtures.csv",
+                    "type": "Expression"
+                },
+                "container": "fixturedata"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "league_id",
+                "type": "String"
+            },
+            {
+                "name": "fixture_id",
+                "type": "String"
+            },
+            {
+                "name": "league_name",
+                "type": "String"
+            },
+            {
+                "name": "league_country",
+                "type": "String"
+            },
+            {
+                "name": "season_id",
+                "type": "String"
+            },
+            {
+                "name": "team_id_home",
+                "type": "String"
+            },
+            {
+                "name": "team_name_home",
+                "type": "String"
+            },
+            {
+                "name": "shots_on_target_home",
+                "type": "String"
+            },
+            {
+                "name": "shots_off_target_home",
+                "type": "String"
+            },
+            {
+                "name": "total_shots_home",
+                "type": "String"
+            },
+            {
+                "name": "shots_blocked_home",
+                "type": "String"
+            },
+            {
+                "name": "shots_insidebox_home",
+                "type": "String"
+            },
+            {
+                "name": "shots_outsidebox_home",
+                "type": "String"
+            },
+            {
+                "name": "fouls_home",
+                "type": "String"
+            },
+            {
+                "name": "corners_home",
+                "type": "String"
+            },
+            {
+                "name": "offsides_home",
+                "type": "String"
+            },
+            {
+                "name": "ball_possession_home",
+                "type": "String"
+            },
+            {
+                "name": "yellow_cards_home",
+                "type": "String"
+            },
+            {
+                "name": "red_cards_home",
+                "type": "String"
+            },
+            {
+                "name": "saves_home",
+                "type": "String"
+            },
+            {
+                "name": "passes_home",
+                "type": "String"
+            },
+            {
+                "name": "accurate_passes_home",
+                "type": "String"
+            },
+            {
+                "name": "pass_accuracy_home",
+                "type": "String"
+            },
+            {
+                "name": "team_id_away",
+                "type": "String"
+            },
+            {
+                "name": "team_name_away",
+                "type": "String"
+            },
+            {
+                "name": "shots_on_target_away",
+                "type": "String"
+            },
+            {
+                "name": "shots_off_target_away",
+                "type": "String"
+            },
+            {
+                "name": "total_shots_away",
+                "type": "String"
+            },
+            {
+                "name": "shots_blocked_away",
+                "type": "String"
+            },
+            {
+                "name": "shots_insidebox_away",
+                "type": "String"
+            },
+            {
+                "name": "shots_outsidebox_away",
+                "type": "String"
+            },
+            {
+                "name": "fouls_away",
+                "type": "String"
+            },
+            {
+                "name": "corners_away",
+                "type": "String"
+            },
+            {
+                "name": "offsides_away",
+                "type": "String"
+            },
+            {
+                "name": "ball_possession_away",
+                "type": "String"
+            },
+            {
+                "name": "yellow_cards_away",
+                "type": "String"
+            },
+            {
+                "name": "red_cards_away",
+                "type": "String"
+            },
+            {
+                "name": "saves_away",
+                "type": "String"
+            },
+            {
+                "name": "passes_away",
+                "type": "String"
+            },
+            {
+                "name": "accurate_passes_away",
+                "type": "String"
+            },
+            {
+                "name": "pass_accuracy_away",
+                "type": "String"
+            },
+            {
+                "name": "uq_id",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}
