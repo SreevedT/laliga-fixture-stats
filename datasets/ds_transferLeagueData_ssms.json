@@ -1,0 +1,66 @@
+{
+    "name": "ds_transferLeagueData_ssms",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_transferData_ssms",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "SqlServerTable",
+        "schema": [
+            {
+                "name": "fixture_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "home_team_score",
+                "type": "nvarchar"
+            },
+            {
+                "name": "away_team_score",
+                "type": "nvarchar"
+            },
+            {
+                "name": "league_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "league_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "home_team_score_ht",
+                "type": "nvarchar"
+            },
+            {
+                "name": "away_team_score_ht",
+                "type": "nvarchar"
+            },
+            {
+                "name": "away_team_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "away_team_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "home_team_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "home_team_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "uq_id",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "season_data"
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

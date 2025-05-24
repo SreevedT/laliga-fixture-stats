@@ -1,0 +1,186 @@
+{
+    "name": "ds_transferFixtureData_ssms",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_transferData_ssms",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "SqlServerTable",
+        "schema": [
+            {
+                "name": "league_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "fixture_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "league_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "league_country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "season_id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "team_id_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "team_name_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_on_target_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_off_target_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "total_shots_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_blocked_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_insidebox_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_outsidebox_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "fouls_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "corners_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "offsides_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ball_possession_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "yellow_cards_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "red_cards_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "saves_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "passes_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "accurate_passes_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "pass_accuracy_home",
+                "type": "nvarchar"
+            },
+            {
+                "name": "team_id_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "team_name_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_on_target_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_off_target_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "total_shots_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_blocked_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_insidebox_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "shots_outsidebox_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "fouls_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "corners_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "offsides_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ball_possession_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "yellow_cards_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "red_cards_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "saves_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "passes_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "accurate_passes_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "pass_accuracy_away",
+                "type": "nvarchar"
+            },
+            {
+                "name": "uq_id",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "fixture_data"
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

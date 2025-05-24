@@ -1,0 +1,85 @@
+{
+    "name": "ds_leagueDataTable",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_transformed_csv",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": {
+                    "value": "@concat(dataset().seasonYear,'_season.csv')",
+                    "type": "Expression"
+                },
+                "container": "rawleague"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "fixture_id",
+                "type": "String"
+            },
+            {
+                "name": "home_team_score",
+                "type": "String"
+            },
+            {
+                "name": "away_team_score",
+                "type": "String"
+            },
+            {
+                "name": "league_id",
+                "type": "String"
+            },
+            {
+                "name": "league_name",
+                "type": "String"
+            },
+            {
+                "name": "home_team_score_ht",
+                "type": "String"
+            },
+            {
+                "name": "away_team_score_ht",
+                "type": "String"
+            },
+            {
+                "name": "away_team_id",
+                "type": "String"
+            },
+            {
+                "name": "away_team_name",
+                "type": "String"
+            },
+            {
+                "name": "home_team_id",
+                "type": "String"
+            },
+            {
+                "name": "home_team_name",
+                "type": "String"
+            },
+            {
+                "name": "season_id",
+                "type": "String"
+            },
+            {
+                "name": "uq_id",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

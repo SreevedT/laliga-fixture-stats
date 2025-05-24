@@ -1,0 +1,24 @@
+{
+    "name": "ds_apifootball_league",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_apifootball_league",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "@concat('fixtures?league=140&season=',dataset().seasonYear)",
+                "type": "Expression"
+            }
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

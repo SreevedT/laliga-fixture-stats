@@ -1,0 +1,186 @@
+{
+    "name": "pl_fixture",
+    "properties": {
+        "activities": [
+            {
+                "name": "lookup_fixture_id_TL",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageReadSettings",
+                            "recursive": true,
+                            "wildcardFileName": "*.csv",
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "dataset": {
+                        "referenceName": "ds_fxtureIdList_csv",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "seasonYear": {
+                                "value": "@pipeline().parameters.seasonYear",
+                                "type": "Expression"
+                            },
+                            "sinkFileNumber": {
+                                "value": "@pipeline().parameters.sinkFileNumber",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "firstRowOnly": false
+                }
+            },
+            {
+                "name": "For each fixture_id_TL",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "lookup_fixture_id_TL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@activity('lookup_fixture_id_TL').output.value",
+                        "type": "Expression"
+                    },
+                    "isSequential": false,
+                    "activities": [
+                        {
+                            "name": "Transform Fixture Data_copy1",
+                            "type": "DatabricksNotebook",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "notebookPath": "/Users/sreeved2000@gmail.com/Laliga/laliga_match_data",
+                                "baseParameters": {
+                                    "fixtureID": {
+                                        "value": "@item().fixture_id",
+                                        "type": "Expression"
+                                    },
+                                    "seasonYear": {
+                                        "value": "@pipeline().parameters.seasonYear",
+                                        "type": "Expression"
+                                    },
+                                    "sinkFileNumber": {
+                                        "value": "@pipeline().parameters.sinkFileNumber",
+                                        "type": "Expression"
+                                    }
+                                }
+                            },
+                            "linkedServiceName": {
+                                "referenceName": "adb_fixturedata_json",
+                                "type": "LinkedServiceReference"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Copy fixture data to database",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "For each fixture_id_TL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageReadSettings",
+                            "recursive": true,
+                            "wildcardFileName": "*.csv",
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "SqlServerSink",
+                        "writeBehavior": "insert",
+                        "sqlWriterUseTableLock": false
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "typeConversion": true,
+                        "typeConversionSettings": {
+                            "allowDataTruncation": true,
+                            "treatBooleanAsNumber": false
+                        }
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_fixtureDataTable",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "seasonYear": {
+                                "value": "@pipeline().parameters.seasonYear",
+                                "type": "Expression"
+                            },
+                            "sinkFileNumber": {
+                                "value": "@pipeline().parameters.sinkFileNumber",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "ds_transferFixtureData_ssms",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            },
+            "sinkFileNumber": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2025-05-22T18:23:42Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

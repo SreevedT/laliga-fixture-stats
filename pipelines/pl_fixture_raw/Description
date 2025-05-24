@@ -1,0 +1,11 @@
+Pipeline to iterate over the fixture_id list and make API calls for each fixture_id and store the JSON response in the blob.
+
+1. Look up activity source points in the CSV files containing the fixture_id list.
+2. ForEach iterates over the list in a sequential order. 
+3. Copy activity inside the ForEach uses REST API to call the https://www.api-football.com/ API and stores the fixture data in JSON format in the prescribed container.
+4. A wait activity is used to make sure that the API calls limit is not crossed. 
+
+Parameters
+ - seasonYear
+ - sinkFileNumber
+

@@ -1,0 +1,35 @@
+{
+    "name": "ds_fxtureIdList_csv",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_fixtureIdList_csv",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            },
+            "sinkFileNumber": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": {
+                    "value": "@concat(dataset().seasonYear,'/','list_',dataset().sinkFileNumber)",
+                    "type": "Expression"
+                },
+                "container": "parsed-league"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

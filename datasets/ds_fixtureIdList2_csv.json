@@ -1,0 +1,36 @@
+{
+    "name": "ds_fixtureIdList2_csv",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_fixtureIdList_csv",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "seasonYear": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": {
+                    "value": "@concat(dataset().seasonYear,'_season_fixture_list_2.csv')",
+                    "type": "Expression"
+                },
+                "folderPath": {
+                    "value": "@concat(dataset().seasonYear,'/','list_2')",
+                    "type": "Expression"
+                },
+                "container": "parsed-league"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}
