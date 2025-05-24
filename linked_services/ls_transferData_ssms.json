@@ -1,0 +1,21 @@
+{
+    "name": "ls_transferData_ssms",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "SqlServer",
+        "typeProperties": {
+            "server": "LA",
+            "database": "LaligaData",
+            "encrypt": "mandatory",
+            "trustServerCertificate": true,
+            "authenticationType": "SQL",
+            "userName": "",
+            "encryptedCredential": ""
+        },
+        "connectVia": {
+            "referenceName": "Footballdtashir",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
